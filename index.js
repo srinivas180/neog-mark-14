@@ -11,17 +11,25 @@ function calcualteStockProfitOrLoss() {
     var currentPrice = currentPriceHTML.value;
     var msg;
 
-    if(initialPrice <= currentPrice) {
-        //profit
-        var profit = calculateProfit(initialPrice, quantity, currentPrice);
-        var profitPercentage = calculateProfitPercentage(initialPrice, profit, quantity);
-        msg = "your profit is " + profit + " and profit percentage is " + profitPercentage + "%";
+    if(initialPrice === '' || quantity === '' || currentPrice === '') {
+        msg = "Please enter values in all fields."
+    }
+    else if(initialPrice <= 0 || quantity <= 0 || currentPrice <= 0) {
+        msg = "please enter positive values greater zero in all fields."
     }
     else {
-        //loss
-        var loss = calculateLoss(initialPrice, quantity, currentPrice);
-        var lossPercentage = calculateLossPercentage(initialPrice, loss, quantity);
-        msg = "your loss is " + loss + " and loss percentage is " + lossPercentage + "%";
+        if(initialPrice <= currentPrice) {
+            //profit
+            var profit = calculateProfit(initialPrice, quantity, currentPrice);
+            var profitPercentage = calculateProfitPercentage(initialPrice, profit, quantity);
+            msg = "your profit is " + profit + " and profit percentage is " + profitPercentage + "%";
+        }
+        else {
+            //loss
+            var loss = calculateLoss(initialPrice, quantity, currentPrice);
+            var lossPercentage = calculateLossPercentage(initialPrice, loss, quantity);
+            msg = "your loss is " + loss + " and loss percentage is " + lossPercentage + "%";
+        }
     }
 
     output.innerText = msg;
